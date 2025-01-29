@@ -7,7 +7,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                       <RouterLink to="/">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Acceuil</a></li>
                       </RouterLink>
                        
                     </ul>
@@ -29,10 +29,10 @@
                  {{store.user['nom'] +' '+store.user['prenom']}}
             </a></li>
             <li @click="ShowAddCommande=2"><a class="dropdown-item" href="#" >
-                  My Commandes
+                  Mes commandes
             </a></li>
             <li><hr class="dropdown-divider"></li>
-            <li @click="Logout()"><a class="dropdown-item" href="#">Sign out</a></li>
+            <li @click="Logout()"><a class="dropdown-item" href="#">Déconnexion</a></li>
           </ul>
         </div>
         <div class="dropstart mx-2">
@@ -46,118 +46,117 @@
     <li v-for="Notification in Notifications" :key="Notification.id"><a class="dropdown-item" href="#">{{Notification.message}}</a></li>
   </ul>
   <ul class="dropdown-menu " v-else >
-    <li ><a class="dropdown-item" href="#">Empty Notifications</a></li>
+    <li ><a class="dropdown-item" href="#">Vide</a></li>
   </ul>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Confirm Achat</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> 
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="border-radius: 15px; overflow: hidden;">
+      <div class="modal-header" style="background-color: #3f8bff; color: #fff;">
+        <h5 class="modal-title" id="exampleModalLabel"> Panier</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
       </div>
-      <div class="modal-body">
-        <section class="h-100 h-custom" style="background-color: #eee;">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col">
-        <div class="card">
-          <div class="card-body p-4">
+      <div class="modal-body" style="background-color: #f9f9f9;">
+        <section class="h-100 h-custom">
+          <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+              <div class="col">
+                <div class="card shadow-lg border-0 rounded-3">
+                  <div class="card-body p-4">
 
-            <div class="row">
+                    <div class="row">
+                      <div class="col-lg-7">
+                        <h5 class="mb-3">
+                          <a href="#!" class="text-body text-decoration-none"><i  class="fas fa-long-arrow-alt-left me-2"></i>Les articles</a>
+                        </h5>
+                        <hr>
 
-              <div class="col-lg-7">
-                <h5 class="mb-3"><a href="#!" class="text-body"><i
-                      class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a></h5>
-                <hr>
-
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                  <div>
-                    <p class="mb-1">Shopping cart</p>
-                    <p class="mb-0">You have {{ CountProducts }} items in your cart</p>
-                  </div>
-                </div>
-
-                <div class="card mb-3" v-for="product in StoreProducts" :key="product">
-                  <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                      <div class="d-flex flex-row align-items-center">
-                        <div>
-                          <img
-                            :src="'http://localhost:8000'+product.product.image"
-                            class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                          <div>
+                            <p class="mb-1" style="font-size: 1.1rem; font-weight: 500;"></p>
+                            <p class="mb-0 text-muted" style="font-size: 1rem;">Vous avez {{ CountProducts }} articles dans votre panier</p>
+                          </div>
                         </div>
-                        <div class="ms-3">
-                          <h5>{{product.product.nom}}</h5>
-                          <p class="small mb-0">{{ product.product.prix }} TND</p>
+
+                        <div class="card mb-3" v-for="product in StoreProducts" :key="product">
+                          <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                              <div class="d-flex flex-row align-items-center">
+                                <div>
+                                  <img
+                                    :src="'http://localhost:8000'+product.product.image"
+                                    class="img-fluid rounded-3" alt="Article du panier" style="width: 65px;">
+                                </div>
+                                <div class="ms-3">
+                                  <h5 class="mb-1" style="font-size: 1rem; color: #333;">{{product.product.nom}}</h5>
+                                  <p class="small mb-0" style="color: #777;">{{ product.product.prix }} DT</p>
+                                </div>
+                              </div>
+                              <div class="d-flex flex-row align-items-center">
+                                <div style="width: 50px;">
+                                  <h5 class="fw-normal mb-0" style="font-size: 1rem;"> Quantité: {{ product.qte }}</h5>
+                                </div>
+                                <a href="#!" style="color: #cecece; font-size: 1.2rem;"><i class="fas fa-trash-alt"></i></a>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div class="d-flex flex-row align-items-center">
-                        <div style="width: 50px;">
-                          <h5 class="fw-normal mb-0"> Qte : {{ product.qte }}</h5>
+                      <div class="col-lg-5">
+                        <div class="card bg-gradient-primary text-white rounded-3 shadow-lg">
+                          <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                              <h5 class="mb-0" style="font-size: 1.2rem;">Détails de la carte</h5>
+                               <img v-if="store.isauth" :src="'http://localhost:8000'+store.user['image']"
+                                class="img-fluid rounded-circle" style="width: 400px; height: 250px;" alt="Avatar">
+                            </div>
+                            <hr class="my-4">
+                            <div class="d-flex justify-content-between mb-4">
+                              <p class="mb-2" style="font-size: 1.1rem;">Total(TTC)</p>
+                              <p class="mb-2" style="font-size: 1.2rem; font-weight: 600;">{{ total }} DT</p>
+                            </div>
+
+                            <button type="button" class="btn btn-warning btn-block btn-lg" @click="AddCommande()" style="border-radius: 8px;">
+                              <div class="d-flex justify-content-between" >
+                                  <span>Confirmer votre panier <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                              </div>
+                            </button>
+
+                          </div>
                         </div>
-                        <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
                       </div>
+
                     </div>
+
                   </div>
                 </div>
               </div>
-              <div class="col-lg-5">
-
-                <div class="card bg-primary text-white rounded-3">
-                  <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                      <h5 class="mb-0">Card details</h5>
-                       <img  v-if="store.isauth" :src="'http://localhost:8000'+store.user['image']"
-                        class="img-fluid rounded-3" style="width: 45px;" alt="Avatar">
-                    </div>
-                    <hr class="my-4">
-                    <div class="d-flex justify-content-between mb-4">
-                      <p class="mb-2">Total(Incl. taxes)</p>
-                      <p class="mb-2">{{ total }}</p>
-                    </div>
-
-                    <button type="button" class="btn btn-info btn-block btn-lg" @click="AddCommande()">
-                      <div class="d-flex justify-content-between" >
-                          <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
-                      </div>
-                    </button>
-
-                  </div>
-                </div>
-
-              </div>
-
             </div>
-
           </div>
-        </div>
+        </section>
       </div>
-    </div>
-  </div>
-</section>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <div class="modal-footer" style="background-color: #f1f1f1;">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
       </div>
     </div>
   </div>
 </div>
+
 
                 </div>
             </div>
         </nav>
         <!-- Header-->
-        <header class="bg-dark py-5">
+        <!-- <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Our Products</h1>
+                    <h1 class="display-4 fw-bolder">Nos Produits</h1>
                     <p class="lead fw-normal text-white-50 mb-0"></p>
                 </div>
             </div>
-        </header>
+        </header> -->
         <!-- Section-->
         <section class="py-5" v-if="ShowAddCommande==0">
             <div class="container px-4 px-lg-5 mt-5">
@@ -184,7 +183,7 @@
                                         <div class="bi-star-fill"></div>
                                     </div>
                                     <!-- Product price-->
-                                    {{ product.prix }} TND
+                                    {{ product.prix }} DT
                                 </div>
                             </div>
                             <!-- Product actions-->
@@ -204,7 +203,7 @@
         </section>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Les Ciments De Bizerte 2024</p></div>
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Les Ciments De Bizerte 2025</p></div>
         </footer>
       </div>
 </template>

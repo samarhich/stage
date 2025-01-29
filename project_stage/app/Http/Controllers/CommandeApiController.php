@@ -76,7 +76,7 @@ class CommandeApiController extends Controller
         $user=User::find($commandes->user_id);
 
         $notif=new notification();
-        $notif->message= "Commande With ".$commandes->code_commande." Accepted";
+        $notif->message= "Commande  ".$commandes->code_commande." acceptée";
         $notif->user_id= $user->id;
         $notif->save();
         broadcast(new NotifEvent("test"));  
